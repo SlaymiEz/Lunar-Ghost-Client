@@ -7,6 +7,7 @@ public:
 	jclass GetClass();
 
 	void clear();
+	void armorItemInSlot(int index);
 private:
 	jobject inventoryInstance;
 };

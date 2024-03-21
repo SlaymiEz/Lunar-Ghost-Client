@@ -30,15 +30,12 @@ void init(void* instance) {
         while (true) {
             if (GetAsyncKeyState(VK_END)) break;
 
-            //Minecraft->GetLocalPlayerSP().sendChatMessage((const char*)"message"); // doesn't work
-            
-            //std::cout << Minecraft->GetLocalPlayerSP().getExperience() << std::endl; // doesn't work
-
             //std::cout << std::to_string(playerSP->GetX()) + " " + 
              //   std::to_string(playerSP->GetY()) + " " + 
                // std::to_string(playerSP->GetZ()) << std::endl;
             if (GetAsyncKeyState('V')) {
-                inventory->clear(); // working
+                //inventory->clear(); // working
+                
                 //std::cout << std::to_string(minecraft->GetLocalPlayerSP().GetExperienceLvL()) << std::endl;
             }
 

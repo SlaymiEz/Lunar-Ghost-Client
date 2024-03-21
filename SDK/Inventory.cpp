@@ -9,10 +9,7 @@ jclass CInventory::GetClass(){
 }
 
 void CInventory::clear() {
-	jclass inventoryClass = lc->GetClass("net.minecraft.entity.player.InventoryPlayer");
-	printf("Loaded the inventory class\n");
-	jmethodID getclearMethod = lc->env->GetMethodID(inventoryClass, "clear", "()V");
-	printf("Loaded the clear method\n");
+	jmethodID getclearMethod = lc->env->GetMethodID(this->GetClass(), "clear", "()V");
 
 	try {
 		lc->env->CallVoidMethod(inventoryInstance, getclearMethod);
@@ -21,4 +18,9 @@ void CInventory::clear() {
 	catch (const std::exception e) {
 		printf("Exception occured!\n", e.what());
 	}
+}
+
+void CInventory::armorItemInSlot(int index) { //yeye not working
+	jmethodID getarmorItemInSlotMethod = lc->env->GetMethodID(this->GetClass(), "armorItemInSlot", "(I)Lnet/minecraft/item/ItemStack;");
+	lc->env->CallVoidMethod(inventoryInstance, getarmorItemInSlotMethod);
 }
