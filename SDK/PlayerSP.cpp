@@ -1,4 +1,5 @@
 #include "PlayerSP.h"
+#include "Inventory.h"
 
 CPlayerSP::CPlayerSP(jobject instance) {
 	this->playerInstance = instance;
@@ -74,32 +75,8 @@ float CPlayerSP::GetExperience() {
 
 // --------------------
 
-void CPlayerSP::clear() { // Working so proud of me
-	jclass playerClass = lc->GetClass("net.minecraft.entity.player.EntityPlayer");
-	printf("Loaded the player class\n");
-	jfieldID playerInventoryField = lc->env->GetFieldID(playerClass, "inventory", "Lnet/minecraft/entity/player/InventoryPlayer;");
-	printf("Loaded the player inventory field\n");
-	jobject playerInventoryObj = lc->env->GetObjectField(playerInstance, playerInventoryField);
-	printf("Loaded the player inventory object\n");
-
-	jclass inventoryClass = lc->GetClass("net.minecraft.entity.player.InventoryPlayer");
-	printf("Loaded the inventory class\n");
-	jmethodID getclearMethod = lc->env->GetMethodID(inventoryClass, "clear", "()V");
-	printf("Loaded the clear method\n");
-	
-	try {
-			lc->env->CallVoidMethod(playerInventoryObj, getclearMethod);
-			printf("Inventory cleared \n");
-	}
-	catch (const std::exception e) {
-			printf("Exception occured!\n", e.what());
-	}
-
-	lc->env->DeleteLocalRef(playerInventoryObj);
-}
-
 CInventory CPlayerSP::GetLocalInventory() {
-	jfieldID playerInventoryField = lc->env->GetFieldID(this->GetPlayerClass, "inventory", "Lnet/minecraft/entity/player/InventoryPlayer;");
+	jfieldID playerInventoryField = lc->env->GetFieldID(this->GetPlayerClass(), "inventory", "Lnet/minecraft/entity/player/InventoryPlayer;");
 	jobject playerInventoryObj = lc->env->GetObjectField(playerInstance, playerInventoryField);
 
 	return CInventory(playerInventoryObj);

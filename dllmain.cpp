@@ -19,7 +19,11 @@ void init(void* instance) {
     if (lc->env != nullptr){
         lc->GetLoadedClasses();
         std::unique_ptr<CMinecraft> minecraft = std::make_unique<CMinecraft>();
+        printf("Loaded minecraft\n");
         std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
+        printf("Loaded the player\n");
+        std::unique_ptr<CInventory> inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory());
+        printf("Loaded the inventory\n");
         //std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
        
         //std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
@@ -34,8 +38,8 @@ void init(void* instance) {
              //   std::to_string(playerSP->GetY()) + " " + 
                // std::to_string(playerSP->GetZ()) << std::endl;
             if (GetAsyncKeyState('V')) {
-                //playerSP->clear(); // working
-                std::cout << std::to_string(minecraft->GetLocalPlayerSP().GetExperienceLvL()) << std::endl;
+                inventory->clear(); // working
+                //std::cout << std::to_string(minecraft->GetLocalPlayerSP().GetExperienceLvL()) << std::endl;
             }
 
             std::this_thread::sleep_for(std::chrono::milliseconds(5));  

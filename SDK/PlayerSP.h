@@ -16,15 +16,14 @@ public:
 	bool isSneaking();
 	bool isBurning();
 
-	float GetExperience(); // Not working
+	float GetExperience();
 
-	int GetExperienceLvL(); // Not working
+	int GetExperienceLvL(); 
 
 	double GetX(), GetY(), GetZ();
 
 	void sendChatMessage(jstring message); // Not working
 
-	void clear();
 private:
 	jobject playerInstance;
 };

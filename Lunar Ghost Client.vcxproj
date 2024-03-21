@@ -152,14 +152,12 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="SDK\Inventory.cpp" />
     <ClCompile Include="SDK\Minecraft.cpp" />
-    <ClCompile Include="SDK\Player.cpp" />
     <ClCompile Include="SDK\PlayerSP.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Java.h" />
     <ClInclude Include="SDK\Inventory.h" />
     <ClInclude Include="SDK\Minecraft.h" />
-    <ClInclude Include="SDK\Player.h" />
     <ClInclude Include="SDK\PlayerSP.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
