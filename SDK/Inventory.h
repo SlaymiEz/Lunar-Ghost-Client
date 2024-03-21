@@ -8,6 +8,8 @@ public:
 
 	void clear();
 	void armorItemInSlot(int index);
+	void dropAllItems();
+	void checkArmor();
 private:
 	jobject inventoryInstance;
 };

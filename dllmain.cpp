@@ -29,16 +29,12 @@ void init(void* instance) {
         //std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
         while (true) {
             if (GetAsyncKeyState(VK_END)) break;
-
             //std::cout << std::to_string(playerSP->GetX()) + " " + 
              //   std::to_string(playerSP->GetY()) + " " + 
                // std::to_string(playerSP->GetZ()) << std::endl;
             if (GetAsyncKeyState('V')) {
-                //inventory->clear(); // working
-                
-                //std::cout << std::to_string(minecraft->GetLocalPlayerSP().GetExperienceLvL()) << std::endl;
+                inventory->checkArmor();
             }
-
             std::this_thread::sleep_for(std::chrono::milliseconds(5));  
         }
     }
