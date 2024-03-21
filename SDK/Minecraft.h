@@ -1,7 +1,7 @@
 #pragma once
 #include "PlayerSP.h"
 #include "Player.h"
-#include "Inventory.h"
+
 
 
 class CMinecraft {
@@ -12,5 +12,4 @@ public:
 	CPlayerSP GetLocalPlayerSP();
 	CPlayer GetLocalPlayer();
 
-	CInventory GetLocalInventory();
 };

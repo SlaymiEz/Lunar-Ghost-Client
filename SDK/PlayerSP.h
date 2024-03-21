@@ -1,5 +1,6 @@
 #pragma once
 #include "../Java.h"
+#include "Inventory.h"
 
 class CPlayerSP {
 public:
@@ -7,6 +8,8 @@ public:
 	jclass GetEntityClass();
 	jclass GetPlayerSPClass();
 	jclass GetPlayerClass();
+
+	CInventory GetLocalInventory();
 
 	void Cleanup();
 

@@ -97,3 +97,10 @@ void CPlayerSP::clear() { // Working so proud of me
 
 	lc->env->DeleteLocalRef(playerInventoryObj);
 }
+
+CInventory CPlayerSP::GetLocalInventory() {
+	jfieldID playerInventoryField = lc->env->GetFieldID(this->GetPlayerClass, "inventory", "Lnet/minecraft/entity/player/InventoryPlayer;");
+	jobject playerInventoryObj = lc->env->GetObjectField(playerInstance, playerInventoryField);
+
+	return CInventory(playerInventoryObj);
+}
