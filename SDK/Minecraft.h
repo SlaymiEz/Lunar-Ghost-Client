@@ -1,6 +1,5 @@
 #pragma once
 #include "PlayerSP.h"
-#include "Player.h"
 
 
 
@@ -10,6 +9,4 @@ public:
 	jobject GetInstance();
 
 	CPlayerSP GetLocalPlayerSP();
-	CPlayer GetLocalPlayer();
-
 };

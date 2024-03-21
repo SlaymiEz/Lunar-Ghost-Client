@@ -26,16 +26,3 @@ CPlayerSP CMinecraft::GetLocalPlayerSP() {
 
 	return CPlayerSP(rtrnSp);
 }
-
-CPlayer CMinecraft::GetLocalPlayer() {
-	jclass minecraftClass = this->GetClass();
-	jobject minecraftObject = this->GetInstance();
-
-	// Get player
-	jfieldID getPlayer = lc->env->GetFieldID(minecraftClass, "thePlayer", "Lnet/minecraft/client/entity/EntityPlayer;");
-	jobject rtrn = lc->env->GetObjectField(minecraftObject, getPlayer);
-
-	lc->env->DeleteLocalRef(minecraftObject);
-
-	return CPlayer(rtrn);
-}
