@@ -20,6 +20,8 @@ jclass CPlayerSP::GetPlayerClass() {
 	return lc->GetClass("net.minecraft.entity.player.EntityPlayer");
 }
 
+// --------------------
+
 bool CPlayerSP::isSneaking() {
 	jmethodID isSneaking = lc->env->GetMethodID(this->GetEntityClass(), "isSneaking", "()Z");
 
@@ -36,10 +38,12 @@ bool CPlayerSP::isBurning() {
 	return rtrn;
 }
 
-void CPlayerSP::sendChatMessage(jstring message) {
+void CPlayerSP::sendChatMessage(jstring message) { // Not working
 	jmethodID sendChatMessage = lc->env->GetMethodID(this->GetEntityClass(), "sendChatMessage", "(Ljava/lang/String;)V");
 	lc->env->CallVoidMethod(this->playerInstance, sendChatMessage);
 }
+
+// ---------------------
 
 double CPlayerSP::GetX() {
 	jfieldID x = lc->env->GetFieldID(this->GetEntityClass(), "posX", "D");
@@ -56,7 +60,7 @@ double CPlayerSP::GetZ() {
 	return lc->env->GetDoubleField(this->playerInstance, z);
 }
 
-// ---------------------- Work in progress
+// ---------------------- 
 
 int CPlayerSP::GetExperienceLvL() {
 	jfieldID xpLvL = lc->env->GetFieldID(this->GetPlayerClass(), "experienceLevel", "I");
