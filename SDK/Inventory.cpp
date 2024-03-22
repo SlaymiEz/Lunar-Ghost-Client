@@ -69,7 +69,7 @@ void CInventory::checkArmor() {
 				printf("You have boots\n");
 				break;
 			case 1:
-				printf("You have leggigs\n");
+				printf("You have leggings\n");
 				break;
 			case 2:
 				printf("You have chestplate\n");
