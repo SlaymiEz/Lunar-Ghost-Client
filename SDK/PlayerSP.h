@@ -29,7 +29,7 @@ public:
 	double GetX(), GetY(), GetZ();
 
 	void sendChatMessage(const std::string &msg); // Working
-	//void addChatMessage(const CIChatComponent &chatComponent);
+	void chatLog(const std::string &msg);
 
 private:
 	jobject playerInstance;

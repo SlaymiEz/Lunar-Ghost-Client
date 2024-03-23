@@ -91,10 +91,17 @@ void CPlayerSP::addExperienceLevel(int level) {
 	lc->env->CallVoidMethod(playerInstance, addExperienceLevel, level);
 }
 
-void CPlayerSP::sendChatMessage(const std::string& msg) {
+void CPlayerSP::sendChatMessage(const std::string &msg) {
 	jmethodID sendChatMessage = lc->env->GetMethodID(this->GetPlayerSPClass(), "sendChatMessage", "(Ljava/lang/String;)V");
 
 	jstring msgString = lc->env->NewStringUTF(msg.c_str());
 	lc->env->CallVoidMethod(playerInstance, sendChatMessage, msgString);
 }
 
+void CPlayerSP::chatLog(const std::string& msg) {
+	jmethodID addChatMessage = lc->env->GetMethodID(this->GetPlayerSPClass(), "addChatMessage", "(Lnet/minecraft/util/IChatComponent;)V");
+	jclass chatComponentTextClass = lc->GetClass("net.minecraft.util.ChatComponentText");
+	jmethodID chatConstructorID = lc->env->GetMethodID(chatComponentTextClass, "<init>", "(Ljava/lang/String;)V");
+	jobject chatComponentObj = lc->env->NewObject(chatComponentTextClass, chatConstructorID, lc->env->NewStringUTF(msg.c_str()));
+	lc->env->CallVoidMethod(playerInstance, addChatMessage, chatComponentObj);
+}

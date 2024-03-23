@@ -33,9 +33,7 @@ void init(void* instance) {
              //   std::to_string(playerSP->GetY()) + " " + 
                // std::to_string(playerSP->GetZ()) << std::endl;
             if (GetAsyncKeyState('V')) {
-                //playerSP->sendChatMessage("Hello world !");
-   
-                
+                playerSP->chatLog("Hello World!");
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(5));  
         }
