@@ -33,7 +33,9 @@ void init(void* instance) {
              //   std::to_string(playerSP->GetY()) + " " + 
                // std::to_string(playerSP->GetZ()) << std::endl;
             if (GetAsyncKeyState('V')) {
-                inventory->checkArmor();
+                //playerSP->sendChatMessage("Hello world !");
+   
+                
             }
             std::this_thread::sleep_for(std::chrono::milliseconds(5));  
         }

@@ -21,6 +21,10 @@ jclass CPlayerSP::GetPlayerClass() {
 	return lc->GetClass("net.minecraft.entity.player.EntityPlayer");
 }
 
+jclass CPlayerSP::GetPlayerMPClass() {
+	return lc->GetClass("net.minecraft.entity.player.EntityPlayerMP");
+}
+
 // --------------------
 
 bool CPlayerSP::isSneaking() {
@@ -37,11 +41,6 @@ bool CPlayerSP::isBurning() {
 	bool rtrn = lc->env->CallBooleanMethod(this->playerInstance, isBurning);
 
 	return rtrn;
-}
-
-void CPlayerSP::sendChatMessage(jstring message) { // Not working
-	jmethodID sendChatMessage = lc->env->GetMethodID(this->GetEntityClass(), "sendChatMessage", "(Ljava/lang/String;)V");
-	lc->env->CallVoidMethod(this->playerInstance, sendChatMessage);
 }
 
 // ---------------------
@@ -81,3 +80,21 @@ CInventory CPlayerSP::GetLocalInventory() {
 
 	return CInventory(playerInventoryObj);
 }
+
+void CPlayerSP::addExperience(int points) {
+	jmethodID addExperience = lc->env->GetMethodID(this->GetPlayerClass(), "addExperience", "(I)V");
+	lc->env->CallVoidMethod(playerInstance, addExperience, points);
+}
+
+void CPlayerSP::addExperienceLevel(int level) {
+	jmethodID addExperienceLevel = lc->env->GetMethodID(this->GetPlayerClass(), "addExperienceLevel", "(I)V");
+	lc->env->CallVoidMethod(playerInstance, addExperienceLevel, level);
+}
+
+void CPlayerSP::sendChatMessage(const std::string& msg) {
+	jmethodID sendChatMessage = lc->env->GetMethodID(this->GetPlayerSPClass(), "sendChatMessage", "(Ljava/lang/String;)V");
+
+	jstring msgString = lc->env->NewStringUTF(msg.c_str());
+	lc->env->CallVoidMethod(playerInstance, sendChatMessage, msgString);
+}
+

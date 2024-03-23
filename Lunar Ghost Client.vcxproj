@@ -150,12 +150,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="SDK\GUI.cpp" />
     <ClCompile Include="SDK\Inventory.cpp" />
     <ClCompile Include="SDK\Minecraft.cpp" />
     <ClCompile Include="SDK\PlayerSP.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Java.h" />
+    <ClInclude Include="SDK\GUI.h" />
     <ClInclude Include="SDK\Inventory.h" />
     <ClInclude Include="SDK\Minecraft.h" />
     <ClInclude Include="SDK\PlayerSP.h" />
