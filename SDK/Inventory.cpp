@@ -75,19 +75,15 @@ void CInventory::checkArmor() {
 		else {
 			switch (i) {
 			case 0:
-				printf("You have boots\n");
 				playerSP->chatLog("You have boots");
 				break;
 			case 1:
-				printf("You have leggigs\n");
-				playerSP->chatLog("You have leggings");
+				playerSP->chatLog("You have leggigs");
 				break;
 			case 2:
-				printf("You have chestplate\n");
 				playerSP->chatLog("You have chestplate");
 				break;
 			case 3:
-				printf("You have helmet\n");
 				playerSP->chatLog("You have helmet");
 				break;
 			}
