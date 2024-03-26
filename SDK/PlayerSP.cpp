@@ -1,6 +1,7 @@
 #include "PlayerSP.h"
 #include "Inventory.h"
 
+
 CPlayerSP::CPlayerSP(jobject instance) {
 	this->playerInstance = instance;
 }
@@ -105,3 +106,4 @@ void CPlayerSP::chatLog(const std::string& msg) {
 	jobject chatComponentObj = lc->env->NewObject(chatComponentTextClass, chatConstructorID, lc->env->NewStringUTF(msg.c_str()));
 	lc->env->CallVoidMethod(playerInstance, addChatMessage, chatComponentObj);
 }
+

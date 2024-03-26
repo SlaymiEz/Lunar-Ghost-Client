@@ -10,6 +10,7 @@ FILE* file = nullptr;
 
 void init(void* instance) {
     jsize count;
+    
 
     if (JNI_GetCreatedJavaVMs(&lc->vm, 1, &count) != JNI_OK || count == 0) return;
     jint res = lc->vm->GetEnv((void**)&lc->env, JNI_VERSION_1_8);
@@ -20,22 +21,21 @@ void init(void* instance) {
         lc->GetLoadedClasses();
         std::unique_ptr<CMinecraft> minecraft = std::make_unique<CMinecraft>();
         printf("Loaded minecraft\n");
-        std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
-        printf("Loaded the player\n");
-        std::unique_ptr<CInventory> inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory());
-        printf("Loaded the inventory\n");
+        
         //std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
        
         //std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
         while (true) {
-            if (GetAsyncKeyState(VK_END)) break;
-            //std::cout << std::to_string(playerSP->GetX()) + " " + 
-             //   std::to_string(playerSP->GetY()) + " " + 
-               // std::to_string(playerSP->GetZ()) << std::endl;
-            if (GetAsyncKeyState('V')) {
-                playerSP->chatLog("Hello World!");
+            std::unique_ptr<CWorld> world = std::make_unique<CWorld>(minecraft->GetLocalWorld());
+            if (world->GetInstance() != NULL) {
+                std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
+                std::unique_ptr<CInventory> inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory());
+                if (GetAsyncKeyState('V')) {
+                    //inventory->checkArmor();
+                }
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(5));  
+            if (GetAsyncKeyState(VK_END)) break;
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
     }
     fclose(file);

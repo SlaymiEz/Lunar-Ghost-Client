@@ -4,6 +4,8 @@ jclass CMinecraft::GetClass() {
 	return lc->GetClass("net.minecraft.client.Minecraft");
 }
 
+
+
 jobject CMinecraft::GetInstance() {
 	jclass minecraftClass = this->GetClass();
 
@@ -25,4 +27,16 @@ CPlayerSP CMinecraft::GetLocalPlayerSP() {
 	lc->env->DeleteLocalRef(minecraftObject);
 
 	return CPlayerSP(rtrnSp);
+}
+
+CWorld CMinecraft::GetLocalWorld() {
+	jclass minecraftClass = this->GetClass();
+	jobject minecraftObject = this->GetInstance();
+
+	jfieldID getWorld = lc->env->GetFieldID(minecraftClass, "theWorld", "Lnet/minecraft/client/multiplayer/WorldClient;");
+	jobject rtrn = lc->env->GetObjectField(minecraftObject, getWorld);
+
+	lc->env->DeleteLocalRef(minecraftObject);
+
+	return CWorld(rtrn);
 }

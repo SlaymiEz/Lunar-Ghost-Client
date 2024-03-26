@@ -1,6 +1,6 @@
 #pragma once
 #include "PlayerSP.h"
-
+#include "World.h"
 
 
 class CMinecraft {
@@ -9,4 +9,7 @@ public:
 	jobject GetInstance();
 
 	CPlayerSP GetLocalPlayerSP();
+	CWorld GetLocalWorld();
+protected:
+	jobject renderManager;
 };

@@ -1,4 +1,6 @@
 #include "Inventory.h"
+#include "PlayerSP.h"
+#include "Minecraft.h"
 
 CInventory::CInventory(jobject instance) {
 	this->inventoryInstance = instance;
@@ -14,6 +16,7 @@ void CInventory::clear() {
 	try {
 		lc->env->CallVoidMethod(inventoryInstance, getclearMethod);
 		printf("Inventory cleared \n");
+		
 	}
 	catch (const std::exception e) {
 		printf("Exception occured!\n", e.what());
@@ -38,6 +41,8 @@ void CInventory::armorItemInSlot(int index) { //yeye not working
 }
 
 void CInventory::checkArmor() {
+	std::unique_ptr<CMinecraft> minecraft = std::make_unique<CMinecraft>();
+	std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
 	jfieldID armorSlotsField = lc->env->GetFieldID(this->GetClass(), "armorInventory", "[Lnet/minecraft/item/ItemStack;");
 	jobjectArray armorInventoryObjArray = static_cast<jobjectArray>(lc->env->GetObjectField(inventoryInstance, armorSlotsField));
 
@@ -51,15 +56,19 @@ void CInventory::checkArmor() {
 			switch (i) {
 			case 0:
 				printf("No boots\n");
+				playerSP->chatLog("No boots");
 				break;
 			case 1:
 				printf("No leggings\n");
+				playerSP->chatLog("No leggings");
 				break;
 			case 2:
 				printf("No chestplate\n");
+				playerSP->chatLog("No chestplate");
 				break;
 			case 3:
 				printf("No helmet\n");
+				playerSP->chatLog("No helmet");
 				break;
 			}
 		}
@@ -67,15 +76,19 @@ void CInventory::checkArmor() {
 			switch (i) {
 			case 0:
 				printf("You have boots\n");
+				playerSP->chatLog("You have boots");
 				break;
 			case 1:
 				printf("You have leggigs\n");
+				playerSP->chatLog("You have leggings");
 				break;
 			case 2:
 				printf("You have chestplate\n");
+				playerSP->chatLog("You have chestplate");
 				break;
 			case 3:
 				printf("You have helmet\n");
+				playerSP->chatLog("You have helmet");
 				break;
 			}
 		}
