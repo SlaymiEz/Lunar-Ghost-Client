@@ -61,11 +61,41 @@ double CPlayerSP::GetZ() {
 	return lc->env->GetDoubleField(this->playerInstance, z);
 }
 
+double CPlayerSP::GetMotionX() {
+	jfieldID motionX = lc->env->GetFieldID(this->GetEntityClass(), "motionX", "D");
+	return lc->env->GetDoubleField(this->playerInstance, motionX);
+}
+
+double CPlayerSP::GetMotionY() {
+	jfieldID motionY = lc->env->GetFieldID(this->GetEntityClass(), "motionY", "D");
+	return lc->env->GetDoubleField(this->playerInstance, motionY);
+}
+
+double CPlayerSP::GetMotionZ() {
+	jfieldID motionZ = lc->env->GetFieldID(this->GetEntityClass(), "motionZ", "D");
+	return lc->env->GetDoubleField(this->playerInstance, motionZ);
+}
+
+void CPlayerSP::setMotion(double x, double y, double z) {
+	jfieldID motionX = lc->env->GetFieldID(this->GetEntityClass(), "motionX", "D");
+	jfieldID motionY = lc->env->GetFieldID(this->GetEntityClass(), "motionY", "D");
+	jfieldID motionZ = lc->env->GetFieldID(this->GetEntityClass(), "motionZ", "D");
+
+	lc->env->SetDoubleField(this->playerInstance, motionX, x);
+	lc->env->SetDoubleField(this->playerInstance, motionY, y);
+	lc->env->SetDoubleField(this->playerInstance, motionZ, z);
+}
+
 // ---------------------- 
 
 int CPlayerSP::GetExperienceLvL() {
 	jfieldID xpLvL = lc->env->GetFieldID(this->GetPlayerClass(), "experienceLevel", "I");
 	return lc->env->GetIntField(this->playerInstance, xpLvL);
+}
+
+int CPlayerSP::GetHurtResistantTime() {
+	jfieldID hurtResistantTime = lc->env->GetFieldID(this->GetEntityClass(), "hurtResistantTime", "I");
+	return lc->env->GetIntField(this->playerInstance, hurtResistantTime);
 }
 
 float CPlayerSP::GetExperience() {
@@ -107,3 +137,11 @@ void CPlayerSP::chatLog(const std::string& msg) {
 	lc->env->CallVoidMethod(playerInstance, addChatMessage, chatComponentObj);
 }
 
+bool CPlayerSP::isHit() {
+	if (this->GetHurtResistantTime() == 20) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}

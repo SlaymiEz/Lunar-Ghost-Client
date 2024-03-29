@@ -20,19 +20,41 @@ void init(void* instance) {
     if (lc->env != nullptr){
         lc->GetLoadedClasses();
         std::unique_ptr<CMinecraft> minecraft = std::make_unique<CMinecraft>();
+        bool hasWorked = false;
         printf("Loaded minecraft\n");
-        
-        //std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
-       
-        //std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
         while (true) {
             std::unique_ptr<CWorld> world = std::make_unique<CWorld>(minecraft->GetLocalWorld());
             if (world->GetInstance() != NULL) {
                 std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
-                std::unique_ptr<CInventory> inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory());
-                if (GetAsyncKeyState('V')) {
-                    //inventory->checkArmor();
+                //inline auto inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory());
+                //std::unique_ptr<CInventory> inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory()); Crashes 
+                //playerSP->chatLog(std::to_string(playerSP->GetHurtResistantTime()));
+                if (playerSP->GetHurtResistantTime() > 0 && hasWorked == false) { // prototype antikb
+                    double motionX = playerSP->GetMotionX(), motionY = playerSP->GetMotionY(), motionZ = playerSP->GetMotionZ();
+                    
+                    motionX *= 0.4;
+                    motionY *= 0.4;
+                    motionZ *= 0.4;
+
+                    playerSP->setMotion(motionX, motionY, motionZ);
+                    hasWorked = true;
+                    //printf("Reduced kb\n");
+                    //playerSP->chatLog("Reduced kb");
                 }
+                if (playerSP->GetHurtResistantTime() == 1 || playerSP->GetHurtResistantTime() == 0) {
+                    hasWorked = false;
+                    //printf("Waiting for hit\n");
+                }
+                if (GetAsyncKeyState('V')) {
+                    //playerSP->GetLocalInventory().checkArmor();
+                    playerSP->GetLocalInventory().checkArmor();
+                }
+                if (playerSP->isHit()) {
+                    playerSP->chatLog("tu t fé tapé sale bambi");
+                }
+            }
+            else {
+                printf("Outside a world\n");
             }
             if (GetAsyncKeyState(VK_END)) break;
             std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -45,6 +67,7 @@ void init(void* instance) {
 
     FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 }
+
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,

@@ -7,9 +7,9 @@ public:
 	jclass GetClass();
 
 	void clear();
-	void armorItemInSlot(int index);
 	void dropAllItems();
 	void checkArmor();
+	jobject GetInstance();
 private:
 	jobject inventoryInstance;
 };
