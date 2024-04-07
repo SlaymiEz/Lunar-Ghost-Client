@@ -47,10 +47,8 @@ void init(void* instance) {
                 }
                 if (GetAsyncKeyState('V')) {
                     //playerSP->GetLocalInventory().checkArmor();
-                    playerSP->GetLocalInventory().checkArmor();
-                }
-                if (playerSP->isHit()) {
-                    playerSP->chatLog("tu t fé tapé sale bambi");
+                    //std::cout << playerSP->GetLocalInventory().GetCurrentSlot() << std::endl;
+                    std::cout << playerSP->GetLocalInventory().GetWaterBucketSlot() << std::endl;
                 }
             }
             else {

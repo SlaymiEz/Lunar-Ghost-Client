@@ -9,6 +9,9 @@ public:
 	void clear();
 	void dropAllItems();
 	void checkArmor();
+	
+	int GetCurrentSlot();
+	int GetWaterBucketSlot();
 	jobject GetInstance();
 private:
 	jobject inventoryInstance;

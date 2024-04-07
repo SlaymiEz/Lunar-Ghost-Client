@@ -137,7 +137,7 @@ void CPlayerSP::chatLog(const std::string& msg) {
 	lc->env->CallVoidMethod(playerInstance, addChatMessage, chatComponentObj);
 }
 
-bool CPlayerSP::isHit() {
+bool CPlayerSP::isHit() { // Not working
 	if (this->GetHurtResistantTime() == 20) {
 		return true;
 	}

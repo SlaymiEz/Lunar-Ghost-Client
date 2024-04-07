@@ -89,6 +89,40 @@ void CInventory::checkArmor() {
 		}
 		lc->env->DeleteLocalRef(itemStack);
 	}
-
 	lc->env->DeleteLocalRef(armorInventoryObjArray);
+}
+
+int CInventory::GetCurrentSlot() {
+	jfieldID currentItem = lc->env->GetFieldID(this->GetClass(), "currentItem", "I");
+	return lc->env->GetIntField(this->GetInstance(), currentItem) + 1;
+}
+
+int CInventory::GetWaterBucketSlot() {
+	jclass itemStackClass = lc->GetClass("net.minecraft.item.ItemStack");
+	jmethodID itemStackGetItemMethod = lc->env->GetMethodID(itemStackClass, "getItem", "()Lnet/minecraft/item/Item;");
+	
+	jfieldID hotbarSlotsField = lc->env->GetFieldID(this->GetClass(), "mainInventory", "[Lnet/minecraft/item/ItemStack;");
+	jobjectArray mainInvObjArray = static_cast<jobjectArray>(lc->env->GetObjectField(inventoryInstance, hotbarSlotsField));
+	
+	jclass itemsClass = lc->GetClass("net.minecraft.init.Items");
+	jclass itemClass = lc->GetClass("net.minecraft.item.Item");
+
+	jfieldID waterBucketField = lc->env->GetStaticFieldID(itemsClass, "water_bucket", "Lnet/minecraft/item/Item;");
+	jobject waterBucketObject = lc->env->GetStaticObjectField(itemClass, waterBucketField);
+
+	int waterSlot = 0;
+	for (int i = 0; i <= 8; i++) {
+		jobject itemStack = lc->env->GetObjectArrayElement(mainInvObjArray, i);
+		jobject item = lc->env->CallObjectMethod(itemStack, itemStackGetItemMethod);
+
+		jboolean isSameObject = lc->env->IsSameObject(item, waterBucketObject);
+		if (isSameObject == true) {
+			int localWaterSlot = i + 1;
+			waterSlot = localWaterSlot;
+		}
+		lc->env->DeleteLocalRef(itemStack);
+	}
+	lc->env->DeleteLocalRef(mainInvObjArray);
+	lc->env->DeleteLocalRef(waterBucketObject);
+	return waterSlot;
 }
