@@ -46,9 +46,8 @@ void init(void* instance) {
                     //printf("Waiting for hit\n");
                 }
                 if (GetAsyncKeyState('V')) {
-                    //playerSP->GetLocalInventory().checkArmor();
-                    //std::cout << playerSP->GetLocalInventory().GetCurrentSlot() << std::endl;
-                    std::cout << playerSP->GetLocalInventory().GetWaterBucketSlot() << std::endl;
+                    std::cout << playerSP->GetYaw() << std::endl;
+                    std::cout << playerSP->GetPitch() << std::endl;
                 }
             }
             else {

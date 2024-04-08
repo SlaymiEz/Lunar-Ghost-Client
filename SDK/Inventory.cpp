@@ -99,23 +99,22 @@ int CInventory::GetCurrentSlot() {
 
 int CInventory::GetWaterBucketSlot() {
 	jclass itemStackClass = lc->GetClass("net.minecraft.item.ItemStack");
-	jmethodID itemStackGetItemMethod = lc->env->GetMethodID(itemStackClass, "getItem", "()Lnet/minecraft/item/Item;");
+	jmethodID itemStackGetItemMethod = lc->env->GetMethodID(itemStackClass, "getItem", "()Lnet/minecraft/item/Item;"); // Loading the getItem method
 	
 	jfieldID hotbarSlotsField = lc->env->GetFieldID(this->GetClass(), "mainInventory", "[Lnet/minecraft/item/ItemStack;");
-	jobjectArray mainInvObjArray = static_cast<jobjectArray>(lc->env->GetObjectField(inventoryInstance, hotbarSlotsField));
+	jobjectArray mainInvObjArray = static_cast<jobjectArray>(lc->env->GetObjectField(inventoryInstance, hotbarSlotsField)); // Loading the mainInventory array
 	
 	jclass itemsClass = lc->GetClass("net.minecraft.init.Items");
-	jclass itemClass = lc->GetClass("net.minecraft.item.Item");
+	jclass itemClass = lc->GetClass("net.minecraft.item.Item"); // Loading the 2 classes we'll need for later
 
 	jfieldID waterBucketField = lc->env->GetStaticFieldID(itemsClass, "water_bucket", "Lnet/minecraft/item/Item;");
-	jobject waterBucketObject = lc->env->GetStaticObjectField(itemClass, waterBucketField);
+	jobject waterBucketObject = lc->env->GetStaticObjectField(itemClass, waterBucketField); // Loading the water_bucket object
 
 	int waterSlot = 0;
 	for (int i = 0; i <= 8; i++) {
-		jobject itemStack = lc->env->GetObjectArrayElement(mainInvObjArray, i);
-		jobject item = lc->env->CallObjectMethod(itemStack, itemStackGetItemMethod);
-
-		jboolean isSameObject = lc->env->IsSameObject(item, waterBucketObject);
+		jobject itemStack = lc->env->GetObjectArrayElement(mainInvObjArray, i); // Loading the itemStack present the mainInventory[i]
+		jobject item = lc->env->CallObjectMethod(itemStack, itemStackGetItemMethod); // Uses the getItem method on the itemStack to return an item
+		jboolean isSameObject = lc->env->IsSameObject(item, waterBucketObject); // Compares the water_bucket item and the item
 		if (isSameObject == true) {
 			int localWaterSlot = i + 1;
 			waterSlot = localWaterSlot;

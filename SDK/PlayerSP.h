@@ -30,12 +30,13 @@ public:
 
 	double GetX(), GetY(), GetZ();
 	double GetMotionX(), GetMotionY(), GetMotionZ();
+	
+	float GetYaw(), GetPitch();
 
 	void sendChatMessage(const std::string &msg); // Working
 	void chatLog(const std::string &msg);
 
 	bool isHit();
-
 private:
 	jobject playerInstance;
 };

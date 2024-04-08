@@ -145,3 +145,18 @@ bool CPlayerSP::isHit() { // Not working
 		return false;
 	}
 }
+
+// --------------------
+
+float CPlayerSP::GetYaw() {
+	jfieldID yaw = lc->env->GetFieldID(this->GetEntityClass(), "rotationYaw", "F");
+	return lc->env->GetFloatField(playerInstance, yaw);
+}
+
+float CPlayerSP::GetPitch() {
+	jfieldID pitch = lc->env->GetFieldID(this->GetEntityClass(), "rotationPitch", "F");
+	return lc->env->GetFloatField(playerInstance, pitch);
+}
+
+// --------------------
+
