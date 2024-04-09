@@ -26,6 +26,10 @@ jclass CPlayerSP::GetPlayerMPClass() {
 	return lc->GetClass("net.minecraft.entity.player.EntityPlayerMP");
 }
 
+jclass CPlayerSP::GetLivingBaseClass() {
+	return lc->GetClass("net.minecraft.entity.EntityLivingBase");
+}
+
 // --------------------
 
 bool CPlayerSP::isSneaking() {
@@ -160,3 +164,7 @@ float CPlayerSP::GetPitch() {
 
 // --------------------
 
+float CPlayerSP::GetHealth() {
+	jmethodID getHealth = lc->env->GetMethodID(this->GetLivingBaseClass(), "getHealth", "()F");
+	return lc->env->CallFloatMethod(this->playerInstance, getHealth);
+}

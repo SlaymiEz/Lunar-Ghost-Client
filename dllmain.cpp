@@ -46,7 +46,7 @@ void init(void* instance) {
                     //printf("Waiting for hit\n");
                 }
                 if (GetAsyncKeyState('V')) {
-                    std::cout << playerSP->GetLocalInventory().GetTotalPots() << std::endl;
+                    std::cout << playerSP->GetHealth() << std::endl;
                 }
             }
             else {

@@ -11,6 +11,7 @@ public:
 	jclass GetPlayerSPClass();
 	jclass GetPlayerClass();
 	jclass GetPlayerMPClass();
+	jclass GetLivingBaseClass();
 
 	CInventory GetLocalInventory();
 
@@ -24,6 +25,7 @@ public:
 	bool isBurning();
 
 	float GetExperience();
+	float GetHealth();
 
 	int GetExperienceLvL(); 
 	int GetHurtResistantTime();
