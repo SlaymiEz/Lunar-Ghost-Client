@@ -12,6 +12,7 @@ public:
 	
 	int GetCurrentSlot();
 	int GetWaterBucketSlot();
+	int GetTotalPots();
 	jobject GetInstance();
 private:
 	jobject inventoryInstance;

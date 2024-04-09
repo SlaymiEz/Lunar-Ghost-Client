@@ -125,3 +125,27 @@ int CInventory::GetWaterBucketSlot() {
 	lc->env->DeleteLocalRef(waterBucketObject);
 	return waterSlot;
 }
+
+int CInventory::GetTotalPots() { // Working
+	jclass itemStackClass = lc->GetClass("net.minecraft.item.ItemStack");
+	jmethodID itemStackGetItemMethod = lc->env->GetMethodID(itemStackClass, "getItem", "()Lnet/minecraft/item/Item;"); // Loading the getItem method
+	jmethodID itemStackGetMetadataMethod = lc->env->GetMethodID(itemStackClass, "getMetadata", "()I"); // Loading the getMetadata method
+	
+	jfieldID inventoryField = lc->env->GetFieldID(this->GetClass(), "mainInventory", "[Lnet/minecraft/item/ItemStack;");
+	jobjectArray mainInvObjArray = static_cast<jobjectArray>(lc->env->GetObjectField(inventoryInstance, inventoryField)); // Loading the mainInventory array
+	
+	int totalPots = 0;
+	for (int i = 0; i < 35; i++) {
+		jobject itemStack = lc->env->GetObjectArrayElement(mainInvObjArray, i); // Loads the itemStack for each slot in the inventory
+		jboolean isNullObject = lc->env->IsSameObject(itemStack, nullptr); // Checks if it's not null
+		if (!isNullObject) {
+			if (lc->env->CallIntMethod(itemStack, itemStackGetMetadataMethod) == 16421) { // Verifies if it's the good item through metadata (Splash potion of Health 2)
+				totalPots++;
+			}
+		}
+		lc->env->DeleteLocalRef(itemStack);
+	}
+	lc->env->DeleteLocalRef(mainInvObjArray);
+	return totalPots;
+}
+

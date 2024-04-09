@@ -46,8 +46,7 @@ void init(void* instance) {
                     //printf("Waiting for hit\n");
                 }
                 if (GetAsyncKeyState('V')) {
-                    std::cout << playerSP->GetYaw() << std::endl;
-                    std::cout << playerSP->GetPitch() << std::endl;
+                    std::cout << playerSP->GetLocalInventory().GetTotalPots() << std::endl;
                 }
             }
             else {
