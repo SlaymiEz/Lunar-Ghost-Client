@@ -162,6 +162,11 @@ float CPlayerSP::GetPitch() {
 	return lc->env->GetFloatField(playerInstance, pitch);
 }
 
+void CPlayerSP::setPitch(float pitch) {
+	jfieldID pitchField = lc->env->GetFieldID(this->GetEntityClass(), "rotationPitch", "F");
+	lc->env->SetFloatField(this->playerInstance, pitchField, pitch);
+}
+
 // --------------------
 
 float CPlayerSP::GetHealth() {

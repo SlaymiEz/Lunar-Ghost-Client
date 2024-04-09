@@ -40,3 +40,15 @@ CWorld CMinecraft::GetLocalWorld() {
 
 	return CWorld(rtrn);
 }
+
+CPlayerController CMinecraft::GetLocalPlayerController() {
+	jclass minecraftClass = this->GetClass();
+	jobject minecraftObject = this->GetInstance();
+
+	jfieldID getPlayerController = lc->env->GetFieldID(minecraftClass, "playerController", "Lnet/minecraft/client/multiplayer/PlayerControllerMP;");
+	jobject rtrn = lc->env->GetObjectField(minecraftObject, getPlayerController);
+
+	lc->env->DeleteLocalRef(minecraftObject);
+
+	return CPlayerController(rtrn);
+}

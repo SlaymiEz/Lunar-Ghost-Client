@@ -8,9 +8,18 @@
 
 FILE* file = nullptr;
 
+void autoPot() {
+    CMinecraft minecraft;
+    CPlayerSP player = minecraft.GetLocalPlayerSP();
+    if (player.GetHealth() <= 5) {
+        player.setPitch(90); // Look down
+    }
+}
+
 void init(void* instance) {
     jsize count;
-    
+    using std::cout;
+    using std::endl;
 
     if (JNI_GetCreatedJavaVMs(&lc->vm, 1, &count) != JNI_OK || count == 0) return;
     jint res = lc->vm->GetEnv((void**)&lc->env, JNI_VERSION_1_8);
@@ -26,27 +35,10 @@ void init(void* instance) {
             std::unique_ptr<CWorld> world = std::make_unique<CWorld>(minecraft->GetLocalWorld());
             if (world->GetInstance() != NULL) {
                 std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
-                //inline auto inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory());
-                //std::unique_ptr<CInventory> inventory = std::make_unique<CInventory>(playerSP->GetLocalInventory()); Crashes 
-                //playerSP->chatLog(std::to_string(playerSP->GetHurtResistantTime()));
-                if (playerSP->GetHurtResistantTime() > 0 && hasWorked == false) { // prototype antikb
-                    double motionX = playerSP->GetMotionX(), motionY = playerSP->GetMotionY(), motionZ = playerSP->GetMotionZ();
-                    
-                    motionX *= 0.4;
-                    motionY *= 0.4;
-                    motionZ *= 0.4;
-
-                    playerSP->setMotion(motionX, motionY, motionZ);
-                    hasWorked = true;
-                    //printf("Reduced kb\n");
-                    //playerSP->chatLog("Reduced kb");
-                }
-                if (playerSP->GetHurtResistantTime() == 1 || playerSP->GetHurtResistantTime() == 0) {
-                    hasWorked = false;
-                    //printf("Waiting for hit\n");
-                }
+                autoPot();
                 if (GetAsyncKeyState('V')) {
-                    std::cout << playerSP->GetHealth() << std::endl;
+                    //std::cout << playerSP->GetHealth() << std::endl;
+                    cout << playerSP->GetPitch() << endl;
                 }
             }
             else {
@@ -63,6 +55,8 @@ void init(void* instance) {
 
     FreeLibraryAndExitThread(static_cast<HMODULE>(instance), 0);
 }
+
+
 
 
 BOOL APIENTRY DllMain( HMODULE hModule,

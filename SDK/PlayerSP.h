@@ -20,6 +20,7 @@ public:
 	void addExperience(int points);
 	void addExperienceLevel(int level);
 	void setMotion(double x, double y, double z);
+	void setPitch(float pitch);
 
 	bool isSneaking();
 	bool isBurning();

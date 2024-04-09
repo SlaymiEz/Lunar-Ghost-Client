@@ -152,6 +152,7 @@
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="SDK\Inventory.cpp" />
     <ClCompile Include="SDK\Minecraft.cpp" />
+    <ClCompile Include="SDK\PlayerController.cpp" />
     <ClCompile Include="SDK\PlayerSP.cpp" />
     <ClCompile Include="SDK\World.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="Java.h" />
     <ClInclude Include="SDK\Inventory.h" />
     <ClInclude Include="SDK\Minecraft.h" />
+    <ClInclude Include="SDK\PlayerController.h" />
     <ClInclude Include="SDK\PlayerSP.h" />
     <ClInclude Include="SDK\World.h" />
   </ItemGroup>
