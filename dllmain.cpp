@@ -34,20 +34,17 @@ void init(void* instance) {
         printf("Loaded minecraft\n");
         while (true) {
             std::unique_ptr<CWorld> world = std::make_unique<CWorld>(minecraft->GetLocalWorld());
+            CWorld worldSimple = minecraft->GetLocalWorld();
             if (world->GetInstance() != NULL) {
                 std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
                 std::unique_ptr<CPlayerController> playerController = std::make_unique<CPlayerController>(minecraft->GetLocalPlayerController());
+                CPlayer playerSimple = minecraft->GetLocalPlayer(); // works
                 autoPot();
                 if (GetAsyncKeyState('V')) {
                     /*if (lc->env->IsSameObject(player->GetHeldItem(), Items->waterBucket)) {
                         cout << "the item is a water bucket" << endl;
                     }*/
-                    if (playerController->isSpeactator()) {
-                        cout << "You're in spectator mode" << endl;
-                    }
-                    else {
-                        cout << "You're not in spectator mode" << endl;
-                    }
+                    playerController->sendUseItem(playerSimple, worldSimple, player->GetHeldItem());
                 }
             }
             else {

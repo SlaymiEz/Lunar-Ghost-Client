@@ -12,11 +12,13 @@ jobject CPlayerController::GetInstance() {
 	return this->playerControllerInstance;
 }
 
-void CPlayerController::sendUseItem(CPlayer* player, CWorld* world, jobject itemStack) {
-
+bool CPlayerController::sendUseItem(CPlayer player, CWorld world, jobject itemStack) {
+	jmethodID sendUseItem = lc->env->GetMethodID(this->GetMPClass(), "sendUseItem", "(Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;)Z");
+	std::cout << "loaded the sendUseItem method" << std::endl;
+	return lc->env->CallBooleanMethod(this->playerControllerInstance, sendUseItem, player, world, itemStack);
 }
 
-bool CPlayerController::isSpeactator() {
+bool CPlayerController::isSpectator() {
 	jmethodID isSpectatorMode = lc->env->GetMethodID(this->GetMPClass(), "isSpectatorMode", "()Z");
 	return lc->env->CallBooleanMethod(this->playerControllerInstance, isSpectatorMode);
 }

@@ -11,9 +11,9 @@ public:
 	jclass GetMPClass();
 	jobject GetInstance();
 	
-	bool isSpeactator();
+	bool isSpectator();
 
-	void sendUseItem(CPlayer* player, CWorld* world, jobject itemStack); // TO-DO : Add a third argument containing an itemstack
+	bool sendUseItem(CPlayer player, CWorld world, jobject itemStack);
 private:
 	jobject playerControllerInstance;
 };

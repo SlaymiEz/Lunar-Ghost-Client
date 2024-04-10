@@ -4,8 +4,9 @@
 class CItems {
 public:
 	CItems();
+	jobject waterBucket;
+private:
+	jobject GetWaterBucketItem();
 	jclass GetItemsClass();
 	jclass GetItemClass();
-	jobject GetWaterBucketItem();
-	jobject waterBucket;
 };
