@@ -15,7 +15,7 @@ jobject CMinecraft::GetInstance() {
 	return rtrn;
 }
 
-CPlayerSP CMinecraft::GetLocalPlayerSP() {
+CPlayer CMinecraft::GetLocalPlayer() {
 	jclass minecraftClass = this->GetClass();
 	jobject minecraftObject = this->GetInstance();
 
@@ -26,7 +26,7 @@ CPlayerSP CMinecraft::GetLocalPlayerSP() {
 	//lc->env->DeleteLocalRef(minecraftClass);
 	lc->env->DeleteLocalRef(minecraftObject);
 
-	return CPlayerSP(rtrnSp);
+	return CPlayer(rtrnSp);
 }
 
 CWorld CMinecraft::GetLocalWorld() {

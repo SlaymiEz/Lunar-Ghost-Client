@@ -1,38 +1,38 @@
-#include "PlayerSP.h"
+#include "Player.h"
 #include "Inventory.h"
 
 
-CPlayerSP::CPlayerSP(jobject instance) {
+CPlayer::CPlayer(jobject instance) {
 	this->playerInstance = instance;
 }
 
-void CPlayerSP::Cleanup() {
+void CPlayer::Cleanup() {
 	lc->env->DeleteLocalRef(this->playerInstance);
 }
 
-jclass CPlayerSP::GetEntityClass() {
+jclass CPlayer::GetEntityClass() {
 	return lc->GetClass("net.minecraft.entity.Entity");
 }
 
-jclass CPlayerSP::GetPlayerSPClass() {
+jclass CPlayer::GetPlayerSPClass() {
 	return lc->GetClass("net.minecraft.client.entity.EntityPlayerSP");
 }
 
-jclass CPlayerSP::GetPlayerClass() {
+jclass CPlayer::GetPlayerClass() {
 	return lc->GetClass("net.minecraft.entity.player.EntityPlayer");
 }
 
-jclass CPlayerSP::GetPlayerMPClass() {
+jclass CPlayer::GetPlayerMPClass() {
 	return lc->GetClass("net.minecraft.entity.player.EntityPlayerMP");
 }
 
-jclass CPlayerSP::GetLivingBaseClass() {
+jclass CPlayer::GetLivingBaseClass() {
 	return lc->GetClass("net.minecraft.entity.EntityLivingBase");
 }
 
 // --------------------
 
-bool CPlayerSP::isSneaking() {
+bool CPlayer::isSneaking() {
 	jmethodID isSneaking = lc->env->GetMethodID(this->GetEntityClass(), "isSneaking", "()Z");
 
 	bool rtrn = lc->env->CallBooleanMethod(this->playerInstance, isSneaking);
@@ -40,7 +40,7 @@ bool CPlayerSP::isSneaking() {
 	return rtrn;
 }
 
-bool CPlayerSP::isBurning() {
+bool CPlayer::isBurning() {
 	jmethodID isBurning = lc->env->GetMethodID(this->GetEntityClass(), "isBurning", "()Z");
 
 	bool rtrn = lc->env->CallBooleanMethod(this->playerInstance, isBurning);
@@ -50,37 +50,37 @@ bool CPlayerSP::isBurning() {
 
 // ---------------------
 
-double CPlayerSP::GetX() {
+double CPlayer::GetX() {
 	jfieldID x = lc->env->GetFieldID(this->GetEntityClass(), "posX", "D");
 	return lc->env->GetDoubleField(this->playerInstance, x);
 }
 
-double CPlayerSP::GetY() {
+double CPlayer::GetY() {
 	jfieldID y = lc->env->GetFieldID(this->GetEntityClass(), "posY", "D");
 	return lc->env->GetDoubleField(this->playerInstance, y);
 }
 
-double CPlayerSP::GetZ() {
+double CPlayer::GetZ() {
 	jfieldID z = lc->env->GetFieldID(this->GetEntityClass(), "posZ", "D");
 	return lc->env->GetDoubleField(this->playerInstance, z);
 }
 
-double CPlayerSP::GetMotionX() {
+double CPlayer::GetMotionX() {
 	jfieldID motionX = lc->env->GetFieldID(this->GetEntityClass(), "motionX", "D");
 	return lc->env->GetDoubleField(this->playerInstance, motionX);
 }
 
-double CPlayerSP::GetMotionY() {
+double CPlayer::GetMotionY() {
 	jfieldID motionY = lc->env->GetFieldID(this->GetEntityClass(), "motionY", "D");
 	return lc->env->GetDoubleField(this->playerInstance, motionY);
 }
 
-double CPlayerSP::GetMotionZ() {
+double CPlayer::GetMotionZ() {
 	jfieldID motionZ = lc->env->GetFieldID(this->GetEntityClass(), "motionZ", "D");
 	return lc->env->GetDoubleField(this->playerInstance, motionZ);
 }
 
-void CPlayerSP::setMotion(double x, double y, double z) {
+void CPlayer::setMotion(double x, double y, double z) {
 	jfieldID motionX = lc->env->GetFieldID(this->GetEntityClass(), "motionX", "D");
 	jfieldID motionY = lc->env->GetFieldID(this->GetEntityClass(), "motionY", "D");
 	jfieldID motionZ = lc->env->GetFieldID(this->GetEntityClass(), "motionZ", "D");
@@ -92,48 +92,48 @@ void CPlayerSP::setMotion(double x, double y, double z) {
 
 // ---------------------- 
 
-int CPlayerSP::GetExperienceLvL() {
+int CPlayer::GetExperienceLvL() {
 	jfieldID xpLvL = lc->env->GetFieldID(this->GetPlayerClass(), "experienceLevel", "I");
 	return lc->env->GetIntField(this->playerInstance, xpLvL);
 }
 
-int CPlayerSP::GetHurtResistantTime() {
+int CPlayer::GetHurtResistantTime() {
 	jfieldID hurtResistantTime = lc->env->GetFieldID(this->GetEntityClass(), "hurtResistantTime", "I");
 	return lc->env->GetIntField(this->playerInstance, hurtResistantTime);
 }
 
-float CPlayerSP::GetExperience() {
+float CPlayer::GetExperience() {
 	jfieldID experience = lc->env->GetFieldID(this->GetPlayerClass(), "experience", "F");
 	return lc->env->GetFloatField(this->playerInstance, experience);
 }
 
 // --------------------
 
-CInventory CPlayerSP::GetLocalInventory() {
+CInventory CPlayer::GetLocalInventory() {
 	jfieldID playerInventoryField = lc->env->GetFieldID(this->GetPlayerClass(), "inventory", "Lnet/minecraft/entity/player/InventoryPlayer;");
 	jobject playerInventoryObj = lc->env->GetObjectField(playerInstance, playerInventoryField);
 
 	return CInventory(playerInventoryObj);
 }
 
-void CPlayerSP::addExperience(int points) {
+void CPlayer::addExperience(int points) {
 	jmethodID addExperience = lc->env->GetMethodID(this->GetPlayerClass(), "addExperience", "(I)V");
 	lc->env->CallVoidMethod(playerInstance, addExperience, points);
 }
 
-void CPlayerSP::addExperienceLevel(int level) {
+void CPlayer::addExperienceLevel(int level) {
 	jmethodID addExperienceLevel = lc->env->GetMethodID(this->GetPlayerClass(), "addExperienceLevel", "(I)V");
 	lc->env->CallVoidMethod(playerInstance, addExperienceLevel, level);
 }
 
-void CPlayerSP::sendChatMessage(const std::string &msg) {
+void CPlayer::sendChatMessage(const std::string &msg) {
 	jmethodID sendChatMessage = lc->env->GetMethodID(this->GetPlayerSPClass(), "sendChatMessage", "(Ljava/lang/String;)V");
 
 	jstring msgString = lc->env->NewStringUTF(msg.c_str());
 	lc->env->CallVoidMethod(playerInstance, sendChatMessage, msgString);
 }
 
-void CPlayerSP::chatLog(const std::string& msg) {
+void CPlayer::chatLog(const std::string& msg) {
 	jmethodID addChatMessage = lc->env->GetMethodID(this->GetPlayerSPClass(), "addChatMessage", "(Lnet/minecraft/util/IChatComponent;)V");
 	jclass chatComponentTextClass = lc->GetClass("net.minecraft.util.ChatComponentText");
 	jmethodID chatConstructorID = lc->env->GetMethodID(chatComponentTextClass, "<init>", "(Ljava/lang/String;)V");
@@ -141,7 +141,7 @@ void CPlayerSP::chatLog(const std::string& msg) {
 	lc->env->CallVoidMethod(playerInstance, addChatMessage, chatComponentObj);
 }
 
-bool CPlayerSP::isHit() { // Not working
+bool CPlayer::isHit() { // Not working
 	if (this->GetHurtResistantTime() == 20) {
 		return true;
 	}
@@ -152,34 +152,34 @@ bool CPlayerSP::isHit() { // Not working
 
 // --------------------
 
-float CPlayerSP::GetYaw() {
+float CPlayer::GetYaw() {
 	jfieldID yaw = lc->env->GetFieldID(this->GetEntityClass(), "rotationYaw", "F");
 	return lc->env->GetFloatField(playerInstance, yaw);
 }
 
-float CPlayerSP::GetPitch() {
+float CPlayer::GetPitch() {
 	jfieldID pitch = lc->env->GetFieldID(this->GetEntityClass(), "rotationPitch", "F");
 	return lc->env->GetFloatField(playerInstance, pitch);
 }
 
-void CPlayerSP::setPitch(float pitch) {
+void CPlayer::setPitch(float pitch) {
 	jfieldID pitchField = lc->env->GetFieldID(this->GetEntityClass(), "rotationPitch", "F");
 	lc->env->SetFloatField(this->playerInstance, pitchField, pitch);
 }
 
 // --------------------
 
-float CPlayerSP::GetHealth() {
+float CPlayer::GetHealth() {
 	jmethodID getHealth = lc->env->GetMethodID(this->GetLivingBaseClass(), "getHealth", "()F");
 	return lc->env->CallFloatMethod(this->playerInstance, getHealth);
 }
 
-jobject CPlayerSP::GetHeldItemStack() { // Returns an itemStack
+jobject CPlayer::GetHeldItemStack() { // Returns an itemStack
 	jmethodID getHeldItem = lc->env->GetMethodID(this->GetPlayerClass(), "getHeldItem", "()Lnet/minecraft/item/ItemStack;");
 	return lc->env->CallObjectMethod(playerInstance, getHeldItem);
 }
 
-jobject CPlayerSP::GetHeldItem() {
+jobject CPlayer::GetHeldItem() {
 	jclass itemStackClass = lc->GetClass("net.minecraft.item.ItemStack");
 	jmethodID itemStackGetItemMethod = lc->env->GetMethodID(itemStackClass, "getItem", "()Lnet/minecraft/item/Item;");
 

@@ -2,11 +2,11 @@
 #include "../Java.h"
 #include "Inventory.h"
 
-class CIChatComponent;
+//class CIChatComponent;
 
-class CPlayerSP {
+class CPlayer {
 public:
-	CPlayerSP(jobject instance);
+	CPlayer(jobject instance);
 	jclass GetEntityClass();
 	jclass GetPlayerSPClass();
 	jclass GetPlayerClass();

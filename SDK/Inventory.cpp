@@ -1,5 +1,5 @@
 #include "Inventory.h"
-#include "PlayerSP.h"
+#include "Player.h"
 #include "Minecraft.h"
 
 CInventory::CInventory(jobject instance) {
@@ -41,7 +41,7 @@ void CInventory::dropAllItems() {
 
 void CInventory::checkArmor() {
 	std::unique_ptr<CMinecraft> minecraft = std::make_unique<CMinecraft>();
-	std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
+	std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
 	jfieldID armorSlotsField = lc->env->GetFieldID(this->GetClass(), "armorInventory", "[Lnet/minecraft/item/ItemStack;");
 	jobjectArray armorInventoryObjArray = static_cast<jobjectArray>(lc->env->GetObjectField(inventoryInstance, armorSlotsField));
 
@@ -55,35 +55,35 @@ void CInventory::checkArmor() {
 			switch (i) {
 			case 0:
 				printf("No boots\n");
-				playerSP->chatLog("No boots");
+				player->chatLog("No boots");
 				break;
 			case 1:
 				printf("No leggings\n");
-				playerSP->chatLog("No leggings");
+				player->chatLog("No leggings");
 				break;
 			case 2:
 				printf("No chestplate\n");
-				playerSP->chatLog("No chestplate");
+				player->chatLog("No chestplate");
 				break;
 			case 3:
 				printf("No helmet\n");
-				playerSP->chatLog("No helmet");
+				player->chatLog("No helmet");
 				break;
 			}
 		}
 		else {
 			switch (i) {
 			case 0:
-				playerSP->chatLog("You have boots");
+				player->chatLog("You have boots");
 				break;
 			case 1:
-				playerSP->chatLog("You have leggigs");
+				player->chatLog("You have leggigs");
 				break;
 			case 2:
-				playerSP->chatLog("You have chestplate");
+				player->chatLog("You have chestplate");
 				break;
 			case 3:
-				playerSP->chatLog("You have helmet");
+				player->chatLog("You have helmet");
 				break;
 			}
 		}

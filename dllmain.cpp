@@ -10,7 +10,7 @@ FILE* file = nullptr;
 
 void autoPot() {
     CMinecraft minecraft;
-    CPlayerSP player = minecraft.GetLocalPlayerSP();
+    CPlayer player = minecraft.GetLocalPlayer();
     if (player.GetHealth() <= 5) {
         player.setPitch(90); // Look down
     }
@@ -35,13 +35,13 @@ void init(void* instance) {
         while (true) {
             std::unique_ptr<CWorld> world = std::make_unique<CWorld>(minecraft->GetLocalWorld());
             if (world->GetInstance() != NULL) {
-                std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
+                std::unique_ptr<CPlayer> player = std::make_unique<CPlayer>(minecraft->GetLocalPlayer());
                 autoPot();
                 if (GetAsyncKeyState('V')) {
-                    /*if (lc->env->IsSameObject(playerSP->GetHeldItem(), Items->GetWaterBucketItem())) { // Working
+                    /*if (lc->env->IsSameObject(player->GetHeldItem(), Items->GetWaterBucketItem())) { // Working
                         cout << "the item is a water bucket" << endl;
                     }*/
-                    if (lc->env->IsSameObject(playerSP->GetHeldItem(), Items->waterBucket)) {
+                    if (lc->env->IsSameObject(player->GetHeldItem(), Items->waterBucket)) {
                         cout << "the item is a water bucket" << endl;
                     }
                 }

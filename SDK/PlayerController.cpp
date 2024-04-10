@@ -11,3 +11,7 @@ jclass CPlayerController::GetMPClass() {
 jobject CPlayerController::GetInstance() {
 	return this->playerControllerInstance;
 }
+
+void CPlayerController::sendUseItem(CPlayer* player, CWorld* world, jobject itemStack) {
+
+}

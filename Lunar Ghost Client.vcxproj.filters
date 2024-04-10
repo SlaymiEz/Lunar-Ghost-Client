@@ -21,7 +21,7 @@
     <ClCompile Include="SDK\Minecraft.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SDK\PlayerSP.cpp">
+    <ClCompile Include="SDK\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SDK\Inventory.cpp">
@@ -44,7 +44,7 @@
     <ClInclude Include="SDK\Minecraft.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\PlayerSP.h">
+    <ClInclude Include="SDK\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SDK\Inventory.h">

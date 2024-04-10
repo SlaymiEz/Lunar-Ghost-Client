@@ -154,7 +154,7 @@
     <ClCompile Include="SDK\Items.cpp" />
     <ClCompile Include="SDK\Minecraft.cpp" />
     <ClCompile Include="SDK\PlayerController.cpp" />
-    <ClCompile Include="SDK\PlayerSP.cpp" />
+    <ClCompile Include="SDK\Player.cpp" />
     <ClCompile Include="SDK\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +163,7 @@
     <ClInclude Include="SDK\Items.h" />
     <ClInclude Include="SDK\Minecraft.h" />
     <ClInclude Include="SDK\PlayerController.h" />
-    <ClInclude Include="SDK\PlayerSP.h" />
+    <ClInclude Include="SDK\Player.h" />
     <ClInclude Include="SDK\World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -18,3 +18,4 @@ jobject CItems::GetWaterBucketItem() {
 	return waterBucket;*/
 	return lc->env->GetStaticObjectField(this->GetItemClass(), waterBucketField);;
 }
+

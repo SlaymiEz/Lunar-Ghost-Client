@@ -1,5 +1,5 @@
 #pragma once
-#include "PlayerSP.h"
+#include "Player.h"
 #include "World.h"
 #include "PlayerController.h"
 #include "Items.h"
@@ -9,7 +9,7 @@ public:
 	jclass GetClass();
 	jobject GetInstance();
 
-	CPlayerSP GetLocalPlayerSP();
+	CPlayer GetLocalPlayer();
 	CWorld GetLocalWorld();
 	CPlayerController GetLocalPlayerController();
 protected:
