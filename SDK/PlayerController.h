@@ -10,6 +10,8 @@ public:
 	CPlayerController(jobject instance);
 	jclass GetMPClass();
 	jobject GetInstance();
+	
+	bool isSpeactator();
 
 	void sendUseItem(CPlayer* player, CWorld* world, jobject itemStack); // TO-DO : Add a third argument containing an itemstack
 private:

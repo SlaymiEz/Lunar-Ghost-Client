@@ -15,3 +15,8 @@ jobject CPlayerController::GetInstance() {
 void CPlayerController::sendUseItem(CPlayer* player, CWorld* world, jobject itemStack) {
 
 }
+
+bool CPlayerController::isSpeactator() {
+	jmethodID isSpectatorMode = lc->env->GetMethodID(this->GetMPClass(), "isSpectatorMode", "()Z");
+	return lc->env->CallBooleanMethod(this->playerControllerInstance, isSpectatorMode);
+}
