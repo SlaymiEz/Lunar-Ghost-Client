@@ -29,6 +29,7 @@ void init(void* instance) {
     if (lc->env != nullptr){
         lc->GetLoadedClasses();
         std::unique_ptr<CMinecraft> minecraft = std::make_unique<CMinecraft>();
+        std::unique_ptr<CItems> Items = std::make_unique<CItems>();
         bool hasWorked = false;
         printf("Loaded minecraft\n");
         while (true) {
@@ -37,8 +38,12 @@ void init(void* instance) {
                 std::unique_ptr<CPlayerSP> playerSP = std::make_unique<CPlayerSP>(minecraft->GetLocalPlayerSP());
                 autoPot();
                 if (GetAsyncKeyState('V')) {
-                    //std::cout << playerSP->GetHealth() << std::endl;
-                    cout << playerSP->GetPitch() << endl;
+                    /*if (lc->env->IsSameObject(playerSP->GetHeldItem(), Items->GetWaterBucketItem())) { // Working
+                        cout << "the item is a water bucket" << endl;
+                    }*/
+                    if (lc->env->IsSameObject(playerSP->GetHeldItem(), Items->waterBucket)) {
+                        cout << "the item is a water bucket" << endl;
+                    }
                 }
             }
             else {

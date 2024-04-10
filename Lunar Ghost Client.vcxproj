@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="SDK\Inventory.cpp" />
+    <ClCompile Include="SDK\Items.cpp" />
     <ClCompile Include="SDK\Minecraft.cpp" />
     <ClCompile Include="SDK\PlayerController.cpp" />
     <ClCompile Include="SDK\PlayerSP.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Java.h" />
     <ClInclude Include="SDK\Inventory.h" />
+    <ClInclude Include="SDK\Items.h" />
     <ClInclude Include="SDK\Minecraft.h" />
     <ClInclude Include="SDK\PlayerController.h" />
     <ClInclude Include="SDK\PlayerSP.h" />

@@ -9,7 +9,7 @@ public:
 	jclass GetMPClass();
 	jobject GetInstance();
 
-	void sendUseItem(CPlayerSP player, CWorld world); // TO-DO : Add a third argument containing an itemstack
+	//void sendUseItem(CPlayerSP player, CWorld world); // TO-DO : Add a third argument containing an itemstack
 private:
 	jobject playerControllerInstance;
 };

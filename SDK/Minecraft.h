@@ -2,6 +2,7 @@
 #include "PlayerSP.h"
 #include "World.h"
 #include "PlayerController.h"
+#include "Items.h"
 
 class CMinecraft {
 public:

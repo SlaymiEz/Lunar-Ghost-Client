@@ -13,6 +13,9 @@ public:
 	jclass GetPlayerMPClass();
 	jclass GetLivingBaseClass();
 
+	jobject GetHeldItem();
+	jobject GetHeldItemStack();
+
 	CInventory GetLocalInventory();
 
 	void Cleanup();

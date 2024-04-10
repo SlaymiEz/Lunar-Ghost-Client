@@ -173,3 +173,15 @@ float CPlayerSP::GetHealth() {
 	jmethodID getHealth = lc->env->GetMethodID(this->GetLivingBaseClass(), "getHealth", "()F");
 	return lc->env->CallFloatMethod(this->playerInstance, getHealth);
 }
+
+jobject CPlayerSP::GetHeldItemStack() { // Returns an itemStack
+	jmethodID getHeldItem = lc->env->GetMethodID(this->GetPlayerClass(), "getHeldItem", "()Lnet/minecraft/item/ItemStack;");
+	return lc->env->CallObjectMethod(playerInstance, getHeldItem);
+}
+
+jobject CPlayerSP::GetHeldItem() {
+	jclass itemStackClass = lc->GetClass("net.minecraft.item.ItemStack");
+	jmethodID itemStackGetItemMethod = lc->env->GetMethodID(itemStackClass, "getItem", "()Lnet/minecraft/item/Item;");
+
+	return lc->env->CallObjectMethod(this->GetHeldItemStack(), itemStackGetItemMethod);
+}
