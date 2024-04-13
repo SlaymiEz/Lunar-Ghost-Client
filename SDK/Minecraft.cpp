@@ -5,7 +5,6 @@ jclass CMinecraft::GetClass() {
 }
 
 
-
 jobject CMinecraft::GetInstance() {
 	jclass minecraftClass = this->GetClass();
 

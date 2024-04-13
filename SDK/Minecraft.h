@@ -3,6 +3,7 @@
 #include "World.h"
 #include "PlayerController.h"
 #include "Items.h"
+#include "Blocks.h"
 
 class CMinecraft {
 public:
