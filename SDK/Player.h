@@ -43,6 +43,8 @@ public:
 	void chatLog(const std::string &msg);
 
 	bool isHit();
+
+	std::string GetFacing();
 private:
 	jobject playerInstance;
 };

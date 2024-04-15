@@ -4,6 +4,7 @@
 #include "PlayerController.h"
 #include "Items.h"
 #include "Blocks.h"
+#include "EnumFacing.h"
 
 class CMinecraft {
 public:

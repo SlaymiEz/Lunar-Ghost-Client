@@ -11,9 +11,9 @@ public:
 	jclass GetWorldClass();
 	jobject GetInstance();
 
-	bool setBlockState(int x, int y, int z, jobject state);
+	bool setBlockState(int x, int y, int z, jobject block);
 
-	void placeBarrierAt(jobject instance, int x, int y, int z);
+	void placeBarrierAt(jobject world, int x, int y, int z);
 
 private:
 	jobject worldInstance;

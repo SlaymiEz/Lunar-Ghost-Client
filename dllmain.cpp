@@ -35,6 +35,7 @@ void init(void* instance) {
         std::unique_ptr<CMinecraft> minecraft = std::make_unique<CMinecraft>();
         std::unique_ptr<CItems> Items = std::make_unique<CItems>();
         std::unique_ptr<CBlocks> Blocks = std::make_unique<CBlocks>();
+        std::unique_ptr<CEnumFacing> EnumFacing = std::make_unique<CEnumFacing>();
         bool hasWorked = false;
         printf("Loaded minecraft\n");
         while (true) {
@@ -46,9 +47,9 @@ void init(void* instance) {
                 CPlayer playerSimple = minecraft->GetLocalPlayer(); // works
                 autoPot();
                 if (GetAsyncKeyState('V')) {
-                    //cout << Blocks->stone << endl;
                     //playerController->sendUseItem(playerSimple, worldSimple, player->GetHeldItemStack());
-                    //world->setBlockState(10, 10, 10, nullObj);
+                    //world->setBlockState(10, 10, 10, Blocks->barrier);
+                    cout << player->GetFacing() << endl;
                 }
             }
             else {

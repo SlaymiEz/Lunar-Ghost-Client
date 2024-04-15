@@ -185,3 +185,28 @@ jobject CPlayer::GetHeldItem() {
 
 	return lc->env->CallObjectMethod(this->GetHeldItemStack(), itemStackGetItemMethod);
 }
+
+std::string CPlayer::GetFacing() {
+	// Target line : Minecraft.getMinecraft().thePlayer.getHorizontalFacing().getHorizontalIndex();
+	jmethodID getHorizontalFacing = lc->env->GetMethodID(this->GetEntityClass(), "getHorizontalFacing", "()Lnet/minecraft/util/EnumFacing;");
+	jobject facing = lc->env->CallObjectMethod(this->playerInstance, getHorizontalFacing);
+	jclass EnumFacingClass = lc->GetClass("net.minecraft.util.EnumFacing");
+	jmethodID getHorizontalIndex = lc->env->GetMethodID(EnumFacingClass, "getHorizontalIndex", "()I");
+	int index = lc->env->CallIntMethod(facing, getHorizontalIndex);
+	std::string facingStr = "";
+	switch (index){
+	case 0:
+		facingStr = "SOUTH";
+		break;
+	case 1:
+		facingStr = "WEST";
+		break;
+	case 2:
+		facingStr = "NORTH";
+		break;
+	case 3:
+		facingStr = "EAST";
+		break;
+	}
+	return facingStr;
+}
