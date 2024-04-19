@@ -11,6 +11,7 @@ jclass CBlocks::GetBlockClass() {
 CBlocks::CBlocks() {
 	this->stone = GetStoneBlock();
 	this->barrier = GetBarrierBlock();
+	this->glass = GetGlassBlock();
 }
 
 jobject CBlocks::GetStoneBlock() {
@@ -21,4 +22,9 @@ jobject CBlocks::GetStoneBlock() {
 jobject CBlocks::GetBarrierBlock() {
 	jfieldID barrierBlockID = lc->env->GetStaticFieldID(this->GetBlocksClass(), "barrier", "Lnet/minecraft/block/Block;");
 	return lc->env->GetStaticObjectField(this->GetBlockClass(), barrierBlockID);
+}
+
+jobject CBlocks::GetGlassBlock() {
+	jfieldID glassBlockID = lc->env->GetStaticFieldID(this->GetBlocksClass(), "glass", "Lnet/minecraft/block/Block;");
+	return lc->env->GetStaticObjectField(this->GetBlockClass(), glassBlockID);
 }

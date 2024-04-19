@@ -55,35 +55,35 @@ void CInventory::checkArmor() {
 			switch (i) {
 			case 0:
 				printf("No boots\n");
-				player->chatLog("No boots");
+				//player->chatLog("No boots");
 				break;
 			case 1:
 				printf("No leggings\n");
-				player->chatLog("No leggings");
+				//player->chatLog("No leggings");
 				break;
 			case 2:
 				printf("No chestplate\n");
-				player->chatLog("No chestplate");
+				//player->chatLog("No chestplate");
 				break;
 			case 3:
 				printf("No helmet\n");
-				player->chatLog("No helmet");
+				//player->chatLog("No helmet");
 				break;
 			}
 		}
 		else {
 			switch (i) {
 			case 0:
-				player->chatLog("You have boots");
+				//player->chatLog("You have boots");
 				break;
 			case 1:
-				player->chatLog("You have leggigs");
+				//player->chatLog("You have leggigs");
 				break;
 			case 2:
-				player->chatLog("You have chestplate");
+				//player->chatLog("You have chestplate");
 				break;
 			case 3:
-				player->chatLog("You have helmet");
+				//player->chatLog("You have helmet");
 				break;
 			}
 		}

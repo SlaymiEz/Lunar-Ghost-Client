@@ -5,6 +5,7 @@
 #include "Items.h"
 #include "Blocks.h"
 #include "EnumFacing.h"
+#include "EnumChatFormatting.h"
 
 class CMinecraft {
 public:

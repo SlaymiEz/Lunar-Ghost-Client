@@ -133,13 +133,13 @@ void CPlayer::sendChatMessage(const std::string &msg) {
 	lc->env->CallVoidMethod(playerInstance, sendChatMessage, msgString);
 }
 
-void CPlayer::chatLog(const std::string& msg) {
+/*void CPlayer::chatLog(jobject color, const std::string& msg) {
 	jmethodID addChatMessage = lc->env->GetMethodID(this->GetPlayerSPClass(), "addChatMessage", "(Lnet/minecraft/util/IChatComponent;)V");
 	jclass chatComponentTextClass = lc->GetClass("net.minecraft.util.ChatComponentText");
 	jmethodID chatConstructorID = lc->env->GetMethodID(chatComponentTextClass, "<init>", "(Ljava/lang/String;)V");
-	jobject chatComponentObj = lc->env->NewObject(chatComponentTextClass, chatConstructorID, lc->env->NewStringUTF(msg.c_str()));
+	jobject chatComponentObj = lc->env->NewObject(chatComponentTextClass, chatConstructorID, color, lc->env->NewStringUTF(msg.c_str()));
 	lc->env->CallVoidMethod(playerInstance, addChatMessage, chatComponentObj);
-}
+}*/
 
 bool CPlayer::isHit() { // Not working
 	if (this->GetHurtResistantTime() == 20) {

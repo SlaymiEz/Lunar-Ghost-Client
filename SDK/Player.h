@@ -40,7 +40,7 @@ public:
 	float GetYaw(), GetPitch();
 
 	void sendChatMessage(const std::string &msg); // Working
-	void chatLog(const std::string &msg);
+	//void chatLog(jobject color, const std::string &msg);
 
 	bool isHit();
 
